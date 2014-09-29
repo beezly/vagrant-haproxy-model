@@ -80,7 +80,7 @@ node default {
     bind_options => [
       'name https',
       'ssl crt /etc/haproxy/ssl/test.site.key',
-      'npn spdy/3.1'
+      'npn http/1.1,spdy/3.1'
     ],
     options => {
       'default_backend' => 'http_cluster',
