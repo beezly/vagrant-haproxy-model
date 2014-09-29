@@ -1,0 +1,4 @@
+---
+packages:
+  - language-pack-en
+nginx::config::spdy: 'on'

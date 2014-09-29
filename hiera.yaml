@@ -1,0 +1,12 @@
+---
+:backends:
+  - module_data
+  - yaml
+  
+:yaml:
+  :datadir: '/vagrant/hiera'
+  
+:hierarchy:
+  - common  
+
+:logger: console
