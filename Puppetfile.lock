@@ -21,6 +21,7 @@ FORGE
 DEPENDENCIES
   camptocamp-openssl (>= 0)
   jfryman-nginx (>= 0)
+  puppetlabs-apt (>= 0)
   puppetlabs-haproxy (>= 0)
   puppetlabs-stdlib (>= 0)
 

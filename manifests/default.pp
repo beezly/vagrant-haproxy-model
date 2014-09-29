@@ -45,14 +45,15 @@ node default {
     require => Openssl::Certificate::X509['test.site'],
   }
   
-  nginx::resource::vhost { 'test.site': 
+  nginx::resource::vhost { 'test.site_spdy': 
+    www_root => '/var/www/test.site',
+    listen_port => 8082,
+    listen_options => 'spdy',
+  }
+  
+  nginx::resource::vhost { 'test.site_http':
     www_root => '/var/www/test.site',
     listen_port => 8081,
-    ssl => true,
-    ssl_port => 8082,
-    spdy => 'on',
-    ssl_cert => '/etc/ssl/private/test.site.crt',
-    ssl_key => '/etc/ssl/private/test.site.key',
   }
   
   class {'haproxy':
