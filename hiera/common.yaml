@@ -2,3 +2,21 @@
 packages:
   - language-pack-en
 nginx::config::spdy: 'on'
+nginx::nginx_vhosts:
+  test.site_spdy:
+    www_root: '/var/www/test.site'
+    listen_port: '8082'
+    listen_options: 'spdy'
+  test.site_http:
+    www_root: '/var/www/test.site'
+    listen_port: '8081'
+haproxy::defaults_options:
+  'mode': 'tcp'
+  'log': 'global'
+  'option': 'tcplog'
+  'timeout':
+    - 'connect 4s'
+    - 'server 300s'
+    - 'client 300s'
+haproxy::global_options:
+  'log': '/dev/log local0'

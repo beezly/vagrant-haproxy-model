@@ -45,32 +45,7 @@ node default {
     require => Openssl::Certificate::X509['test.site'],
   }
   
-  nginx::resource::vhost { 'test.site_spdy': 
-    www_root => '/var/www/test.site',
-    listen_port => 8082,
-    listen_options => 'spdy',
-  }
-  
-  nginx::resource::vhost { 'test.site_http':
-    www_root => '/var/www/test.site',
-    listen_port => 8081,
-  }
-  
   class {'haproxy':
-    defaults_options => {
-      'mode'    => 'tcp',
-      'log'     => 'global',
-      'option'  => 'tcplog',
-      'timeout' => [
-        'connect 4s',
-        'server 300s',
-        'client 300s',
-      ],
-    },
-    global_options => {
-      'log' => '/dev/log local0 info',
-      'log' => '/dev/log local0 notice',
-    },
     require => Apt::Ppa['ppa:vbernat/haproxy-1.5'],
   }
   
@@ -80,7 +55,7 @@ node default {
     bind_options => [
       'name https',
       'ssl crt /etc/haproxy/ssl/test.site.key',
-      'npn spdy/3.1'
+      'npn spdy/3.1,http/1.1'
     ],
     options => {
       'default_backend' => 'http_cluster',
